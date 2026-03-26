@@ -4,6 +4,10 @@ defaultSettings:
   storageOverProvisioningPercentage: 200
   storageMinimalAvailablePercentage: 10
 
+preUpgradeChecker:
+  jobEnabled: false
+  upgradeVersionCheck: false
+
 longhornManager:
   nodeSelector:
     smescloud.com/storage: longhorn

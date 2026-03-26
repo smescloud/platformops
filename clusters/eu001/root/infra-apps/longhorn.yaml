@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: eu001-longhorn
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  project: default
+  sources:
+    - repoURL: https://charts.longhorn.io
+      chart: longhorn
+      targetRevision: 1.9.1
+      helm:
+        releaseName: longhorn
+        valueFiles:
+          - $values/platform/infra/longhorn/values-base.yaml
+          - $values/clusters/eu001/overlays/longhorn-values.yaml
+    - repoURL: https://github.com/smescloud/platformops.git
+      targetRevision: eu001-r0001
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: longhorn-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

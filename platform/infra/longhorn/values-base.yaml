@@ -1,0 +1,17 @@
+defaultSettings:
+  defaultDataPath: /var/lib/longhorn
+  defaultReplicaCount: 1
+  storageOverProvisioningPercentage: 200
+  storageMinimalAvailablePercentage: 10
+
+longhornManager:
+  nodeSelector:
+    smescloud.com/storage: longhorn
+
+longhornDriver:
+  nodeSelector:
+    smescloud.com/storage: longhorn
+
+longhornUI:
+  nodeSelector:
+    smescloud.com/storage: longhorn

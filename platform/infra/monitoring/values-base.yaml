@@ -1,6 +1,5 @@
 grafana:
   enabled: true
-  adminPassword: CHANGE_ME_BEFORE_BOOTSTRAP
   service:
     type: ClusterIP
 

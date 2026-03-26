@@ -51,11 +51,11 @@ affinity:
     requiredDuringSchedulingIgnoredDuringExecution:
       nodeSelectorTerms:
         - matchExpressions:
-            - key: smescloud.com/node-role
-              operator: In
-              values: ["worker"]
             - key: smescloud.com/ingress
               operator: In
               values: ["true"]
 
-tolerations: []
+tolerations: 
+  - key: node-role.kubernetes.io/control-plane
+    operator: Exists
+    effect: NoSchedule

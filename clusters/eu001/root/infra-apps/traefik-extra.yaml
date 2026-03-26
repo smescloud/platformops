@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/smescloud/platformops.git
-    targetRevision: eu001-r0001
+    targetRevision: main
     path: platform/infra/traefik/extra-manifests
   destination:
     server: https://kubernetes.default.svc

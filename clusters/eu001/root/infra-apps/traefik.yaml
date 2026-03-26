@@ -17,7 +17,7 @@ spec:
           - $values/platform/infra/traefik/values-base.yaml
           - $values/clusters/eu001/overlays/traefik-values.yaml
     - repoURL: https://github.com/smescloud/platformops.git
-      targetRevision: eu001-r0001
+      targetRevision: main
       ref: values
   destination:
     server: https://kubernetes.default.svc

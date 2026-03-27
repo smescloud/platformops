@@ -3,9 +3,9 @@ kind: Kustomization
 resources:
   - infra-apps/namespaces.yaml
   - infra-apps/cert-manager.yaml
+  - infra-apps/traefik-crds.yaml
   - infra-apps/traefik.yaml
   - infra-apps/cert-issuers.yaml
-  - infra-apps/traefik-extra.yaml
   - infra-apps/longhorn.yaml
   - infra-apps/monitoring.yaml
   - infra-apps/auth.yaml

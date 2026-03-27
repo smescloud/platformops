@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - traefik-daemonset.yaml
+  - traefik-ingressclass.yaml
+  - traefik-crd-reader.yaml
+  - traefik-crd-binding.yaml
+  - middleware-redirect-https.yaml

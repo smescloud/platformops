@@ -1,16 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: eu001-traefik-extra
+  name: eu001-traefik-crds
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   project: default
   source:
     repoURL: https://github.com/smescloud/platformops.git
     targetRevision: main
-    path: platform/infra/traefik/extra-manifests
+    path: platform/infra/traefik/crds
   destination:
     server: https://kubernetes.default.svc
     namespace: traefik-system

@@ -7,18 +7,10 @@ metadata:
     argocd.argoproj.io/sync-wave: "0"
 spec:
   project: default
-  sources:
-    - repoURL: https://traefik.github.io/charts
-      chart: traefik
-      targetRevision: 34.4.0
-      helm:
-        releaseName: traefik
-        valueFiles:
-          - $values/platform/infra/traefik/values-base.yaml
-          - $values/clusters/eu001/overlays/traefik-values.yaml
-    - repoURL: https://github.com/smescloud/platformops.git
-      targetRevision: main
-      ref: values
+  source:
+    repoURL: https://github.com/smescloud/platformops.git
+    targetRevision: main
+    path: platform/infra/traefik/base
   destination:
     server: https://kubernetes.default.svc
     namespace: traefik-system

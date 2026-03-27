@@ -14,6 +14,44 @@ spec:
       labels:
         app: keycloak
     spec:
+      initContainers:
+        - name: wait-for-postgres
+          image: postgres:15-alpine
+          env:
+            - name: PGHOST
+              value: keycloak-postgresql
+            - name: PGPORT
+              value: "5432"
+            - name: PGDATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-db-secret
+                  key: database
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-db-secret
+                  key: username
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-db-secret
+                  key: password
+          command:
+            - sh
+            - -c
+            - |
+              echo "Waiting for PostgreSQL DNS..."
+              until getent hosts "${PGHOST}" >/dev/null 2>&1; do
+                sleep 2
+              done
+
+              echo "Waiting for PostgreSQL readiness..."
+              until pg_isready -h "${PGHOST}" -p "${PGPORT}" -d "${PGDATABASE}" -U "${PGUSER}"; do
+                sleep 3
+              done
+
+              echo "PostgreSQL is ready"
       containers:
         - name: keycloak
           image: quay.io/keycloak/keycloak:21.1.1
@@ -32,7 +70,7 @@ spec:
             - name: KC_DB
               value: postgres
             - name: KC_DB_URL_HOST
-              value: keycloak-postgresql.auth.svc.cluster.local
+              value: keycloak-postgresql
             - name: KC_DB_URL_PORT
               value: "5432"
             - name: KC_DB_URL_DATABASE
@@ -61,18 +99,29 @@ spec:
           ports:
             - name: http
               containerPort: 8080
+          startupProbe:
+            httpGet:
+              path: /realms/master
+              port: 8080
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 60
           readinessProbe:
             httpGet:
               path: /realms/master
               port: 8080
-            initialDelaySeconds: 30
+            initialDelaySeconds: 10
             periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 6
           livenessProbe:
             httpGet:
               path: /realms/master
               port: 8080
-            initialDelaySeconds: 60
+            initialDelaySeconds: 30
             periodSeconds: 20
+            timeoutSeconds: 5
+            failureThreshold: 6
           resources:
             requests:
               cpu: 500m

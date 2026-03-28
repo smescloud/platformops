@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: auth-eu001-tls
+  namespace: auth
+spec:
+  secretName: auth-eu001-tls
+  issuerRef:
+    name: letsencrypt-dns
+    kind: ClusterIssuer
+  dnsNames:
+    - auth.eu001.smescloud.com

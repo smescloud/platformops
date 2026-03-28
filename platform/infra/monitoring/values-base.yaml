@@ -1,16 +1,46 @@
+crds:
+  enabled: false
+
+defaultRules:
+  create: true
+
+# Keep the first version practical.
+# These control-plane targets are useful later, but on a small kubeadm cluster
+# they often create noise before they create value.
+kubeEtcd:
+  enabled: false
+
+kubeControllerManager:
+  enabled: false
+
+kubeScheduler:
+  enabled: false
+
 grafana:
   enabled: true
+
   service:
     type: ClusterIP
+
+  persistence:
+    enabled: true
+    type: pvc
+    storageClassName: longhorn
+    accessModes:
+      - ReadWriteOnce
+    size: 10Gi
 
 alertmanager:
   enabled: true
   alertmanagerSpec:
+    replicas: 1
+    retention: 120h
     storage:
       volumeClaimTemplate:
         spec:
           storageClassName: longhorn
-          accessModes: ["ReadWriteOnce"]
+          accessModes:
+            - ReadWriteOnce
           resources:
             requests:
               storage: 5Gi
@@ -18,12 +48,14 @@ alertmanager:
 prometheus:
   enabled: true
   prometheusSpec:
+    replicas: 1
     retention: 10d
     storageSpec:
       volumeClaimTemplate:
         spec:
           storageClassName: longhorn
-          accessModes: ["ReadWriteOnce"]
+          accessModes:
+            - ReadWriteOnce
           resources:
             requests:
               storage: 20Gi

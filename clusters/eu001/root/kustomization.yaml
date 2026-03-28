@@ -1,5 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+
 resources:
   - infra-apps/namespaces.yaml
   - infra-apps/coredns.yaml
@@ -8,5 +9,6 @@ resources:
   - infra-apps/traefik.yaml
   - infra-apps/cert-issuers.yaml
   - infra-apps/longhorn.yaml
+  - infra-apps/monitoring-crds.yaml
   - infra-apps/monitoring.yaml
   - infra-apps/auth.yaml

@@ -24,7 +24,7 @@
 ## Git edits before first sync
 - [ ] set real Grafana admin password in `clusters/eu001/overlays/monitoring-values.yaml`
 - [ ] verify repo URL and revision in `clusters/eu001/bootstrap/root-app.yaml`
-- [ ] verify Keycloak hostname `auth.eu001.smescloud.com`
+- [ ] verify Keycloak hostname `auth-eu001.smescloud.com`
 
 ## Apply
 - [ ] `kubectl apply -f clusters/eu001/bootstrap/root-app.yaml`

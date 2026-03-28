@@ -9,4 +9,4 @@ spec:
     name: letsencrypt-dns
     kind: ClusterIssuer
   dnsNames:
-    - auth.eu001.smescloud.com
+    - auth-eu001.smescloud.com

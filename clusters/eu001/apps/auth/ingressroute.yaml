@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`auth.eu001.smescloud.com`)
+    - match: Host(`auth-eu001.smescloud.com`)
       kind: Rule
       services:
         - name: keycloak

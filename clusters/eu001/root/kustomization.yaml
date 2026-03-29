@@ -12,3 +12,4 @@ resources:
   - infra-apps/monitoring-crds.yaml
   - infra-apps/monitoring.yaml
   - infra-apps/auth.yaml
+  - infra-apps/argocd-access.yaml

@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: argocd-eu001-tls
+  namespace: argocd
+spec:
+  secretName: argocd-eu001-tls
+  issuerRef:
+    name: letsencrypt-dns
+    kind: ClusterIssuer
+  dnsNames:
+    - argocd-eu001.smescloud.com

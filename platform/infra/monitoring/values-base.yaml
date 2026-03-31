@@ -4,20 +4,37 @@ crds:
 defaultRules:
   create: true
 
-# Keep the first version practical.
-# These control-plane targets are useful later, but on a small kubeadm cluster
-# they often create noise before they create value.
+kubeApiServer:
+  enabled: true
+
+kubelet:
+  enabled: true
+
+coreDns:
+  enabled: true
+
+kubeProxy:
+  enabled: true
+
 kubeEtcd:
-  enabled: false
+  enabled: true
 
 kubeControllerManager:
-  enabled: false
+  enabled: true
 
 kubeScheduler:
-  enabled: false
+  enabled: true
+
+kube-state-metrics:
+  enabled: true
+
+prometheus-node-exporter:
+  enabled: true
 
 grafana:
   enabled: true
+
+  defaultDashboardsEnabled: true
 
   service:
     type: ClusterIP
@@ -30,8 +47,20 @@ grafana:
       - ReadWriteOnce
     size: 10Gi
 
+  sidecar:
+    dashboards:
+      enabled: true
+      searchNamespace: ALL
+    datasources:
+      enabled: true
+      defaultDatasourceEnabled: true
+
 alertmanager:
   enabled: true
+
+  service:
+    type: ClusterIP
+
   alertmanagerSpec:
     replicas: 1
     retention: 120h
@@ -45,11 +74,31 @@ alertmanager:
             requests:
               storage: 5Gi
 
+prometheusOperator:
+  enabled: true
+
 prometheus:
   enabled: true
+
+  service:
+    type: ClusterIP
+
   prometheusSpec:
     replicas: 1
     retention: 10d
+    scrapeInterval: 30s
+    evaluationInterval: 30s
+
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    ruleSelectorNilUsesHelmValues: false
+    probeSelectorNilUsesHelmValues: false
+
+    serviceMonitorNamespaceSelector: {}
+    podMonitorNamespaceSelector: {}
+    ruleNamespaceSelector: {}
+    probeNamespaceSelector: {}
+
     storageSpec:
       volumeClaimTemplate:
         spec:

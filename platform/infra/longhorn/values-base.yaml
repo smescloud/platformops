@@ -19,3 +19,9 @@ longhornDriver:
 longhornUI:
   nodeSelector:
     smescloud.com/storage: longhorn
+
+metrics:
+  serviceMonitor:
+    enabled: true
+    additionalLabels:
+      release: monitoring

@@ -76,6 +76,13 @@ kubectl -n auth create secret generic keycloak-db-secret   --from-literal=userna
 kubectl -n auth create secret generic keycloak-admin-secret   --from-literal=username='admin'   --from-literal=password='REPLACE_WITH_ADMIN_PASSWORD'   --dry-run=client -o yaml | kubectl apply -f -
 ```
 
+kubectl create namespace monitoring --dry-run=client -o yaml | kubectl apply -f -
+
+kubectl -n monitoring create secret generic grafana-admin-secret \
+  --from-literal=admin-user='admin' \
+  --from-literal=admin-password='REPLACE_WITH_GRAFANA_PASSWORD' \
+  --dry-run=client -o yaml | kubectl apply -f -
+
 6. Edit these files before first bootstrap:
    - `clusters/eu001/overlays/monitoring-values.yaml` → set Grafana admin password
    - `clusters/eu001/bootstrap/root-app.yaml` → set correct repo URL / revision if needed

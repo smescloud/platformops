@@ -20,9 +20,3 @@ spec:
       selfHeal: true
     syncOptions:
       - SkipDryRunOnMissingResource=true
-  ignoreDifferences:
-    - group: operator.tigera.io
-      kind: Installation
-      name: default
-      jsonPointers:
-        - /spec

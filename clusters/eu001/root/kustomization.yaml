@@ -3,6 +3,9 @@ kind: Kustomization
 
 resources:
   - infra-apps/namespaces.yaml
+  - infra-apps/calico-crds.yaml
+  - infra-apps/calico-operator.yaml
+  - infra-apps/calico.yaml
   - infra-apps/coredns.yaml
   - infra-apps/cert-manager.yaml
   - infra-apps/traefik-crds.yaml

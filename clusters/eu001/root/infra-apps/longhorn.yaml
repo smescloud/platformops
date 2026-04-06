@@ -17,7 +17,7 @@ spec:
           - $values/platform/infra/longhorn/values-base.yaml
           - $values/clusters/eu001/overlays/longhorn-values.yaml
     - repoURL: https://github.com/smescloud/platformops.git
-      targetRevision: main
+      targetRevision: eu001-release1
       ref: values
   destination:
     server: https://kubernetes.default.svc

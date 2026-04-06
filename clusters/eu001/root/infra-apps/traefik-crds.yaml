@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/smescloud/platformops.git
-    targetRevision: main
+    targetRevision: eu001-release1
     path: platform/infra/traefik/crds
   destination:
     server: https://kubernetes.default.svc

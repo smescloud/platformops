@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tenant1-bootstrap
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
+spec:
+  project: tenant1
+  source:
+    repoURL: https://github.com/smescloud/platformops.git
+    targetRevision: eu001-release1
+    path: platform/tenants/tenant1
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: tenant1
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

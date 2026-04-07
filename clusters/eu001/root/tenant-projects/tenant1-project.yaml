@@ -1,0 +1,48 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: tenant1
+  namespace: argocd
+spec:
+  description: Tenant1 isolated project
+  sourceRepos:
+    - https://github.com/smescloud/platformops.git
+    - https://github.com/smescloud/tenant1-app-config.git
+  destinations:
+    - namespace: tenant1
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist: []
+  namespaceResourceWhitelist:
+    - group: ""
+      kind: ConfigMap
+    - group: ""
+      kind: Secret
+    - group: ""
+      kind: Service
+    - group: ""
+      kind: PersistentVolumeClaim
+    - group: ""
+      kind: ServiceAccount
+    - group: "apps"
+      kind: Deployment
+    - group: "apps"
+      kind: StatefulSet
+    - group: "batch"
+      kind: Job
+    - group: "batch"
+      kind: CronJob
+    - group: "networking.k8s.io"
+      kind: Ingress
+    - group: "traefik.io"
+      kind: IngressRoute
+    - group: "autoscaling"
+      kind: HorizontalPodAutoscaler
+  roles:
+    - name: tenant-admin
+      description: Tenant1 Argo CD access
+      groups:
+        - tenant1-argocd
+      policies:
+        - p, proj:tenant1:tenant-admin, applications, get, tenant1/*, allow
+        - p, proj:tenant1:tenant-admin, applications, sync, tenant1/*, allow
+        - p, proj:tenant1:tenant-admin, logs, get, tenant1/*, allow

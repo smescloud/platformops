@@ -13,3 +13,6 @@ resources:
   - infra-apps/monitoring.yaml
   - infra-apps/auth.yaml
   - infra-apps/argocd-access.yaml
+  - tenant-projects/tenant1-project.yaml
+  - tenant-bootstrap/tenant1-bootstrap.yaml
+  - tenant-apps/tenant1-app.yaml

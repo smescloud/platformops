@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: tenant-quota
+  namespace: nextnodepostgres
+spec:
+  hard:
+    pods: "20"
+    services: "10"
+    persistentvolumeclaims: "5"
+    configmaps: "30"
+    secrets: "30"
+    requests.cpu: "2"
+    limits.cpu: "2"
+    requests.memory: "4Gi"
+    limits.memory: "4Gi"
+    requests.storage: "40Gi"

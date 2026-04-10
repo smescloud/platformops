@@ -2,7 +2,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: tenant-poweruser
-  namespace: tenant1
+  namespace: nextnodepostgres
 rules:
   - apiGroups: [""]
     resources:
@@ -17,6 +17,8 @@ rules:
       - persistentvolumeclaims
       - events
       - serviceaccounts
+      - resourcequotas
+      - limitranges
     verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
   - apiGroups: ["apps"]
     resources:
@@ -32,6 +34,7 @@ rules:
   - apiGroups: ["networking.k8s.io"]
     resources:
       - ingresses
+      - networkpolicies
     verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
   - apiGroups: ["traefik.io"]
     resources:
@@ -40,4 +43,9 @@ rules:
   - apiGroups: ["autoscaling"]
     resources:
       - horizontalpodautoscalers
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: ["rbac.authorization.k8s.io"]
+    resources:
+      - roles
+      - rolebindings
     verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]

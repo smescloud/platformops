@@ -1,19 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: tenant1-app
+  name: nextnodepostgres-app
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "11"
 spec:
-  project: tenant1
+  project: nextnodepostgres
   source:
-    repoURL: https://github.com/smescloud/tenant1-app-config.git
+    repoURL: https://github.com/smescloud/nextnodepgsql.git
     targetRevision: main
     path: k8s
   destination:
     server: https://kubernetes.default.svc
-    namespace: tenant1
+    namespace: nextnodepostgres
   syncPolicy:
     automated:
       prune: true

@@ -2,10 +2,10 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: tenant-poweruser-binding
-  namespace: tenant1
+  namespace: nextnodepostgres
 subjects:
   - kind: Group
-    name: oidc:tenant1-k8s
+    name: oidc:nextnodepostgres-k8s
     apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: Role

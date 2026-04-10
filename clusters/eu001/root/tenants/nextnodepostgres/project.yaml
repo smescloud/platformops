@@ -1,0 +1,64 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: nextnodepostgres
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "9"
+spec:
+  description: nextnodepostgres isolated project
+  sourceRepos:
+    - https://github.com/smescloud/platformops.git
+    - https://github.com/smescloud/nextnodepgsql.git
+  destinations:
+    - namespace: nextnodepostgres
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace
+  namespaceResourceWhitelist:
+    - group: ""
+      kind: ConfigMap
+    - group: ""
+      kind: Secret
+    - group: ""
+      kind: Service
+    - group: ""
+      kind: PersistentVolumeClaim
+    - group: ""
+      kind: ServiceAccount
+    - group: ""
+      kind: ResourceQuota
+    - group: ""
+      kind: LimitRange
+    - group: "apps"
+      kind: Deployment
+    - group: "apps"
+      kind: ReplicaSet
+    - group: "apps"
+      kind: StatefulSet
+    - group: "batch"
+      kind: Job
+    - group: "batch"
+      kind: CronJob
+    - group: "networking.k8s.io"
+      kind: Ingress
+    - group: "networking.k8s.io"
+      kind: NetworkPolicy
+    - group: "traefik.io"
+      kind: IngressRoute
+    - group: "autoscaling"
+      kind: HorizontalPodAutoscaler
+    - group: "rbac.authorization.k8s.io"
+      kind: Role
+    - group: "rbac.authorization.k8s.io"
+      kind: RoleBinding
+  roles:
+    - name: tenant-admin
+      description: nextnodepostgres Argo CD access
+      groups:
+        - nextnodepostgres-argocd
+      policies:
+        - p, proj:nextnodepostgres:tenant-admin, applications, get, nextnodepostgres/*, allow
+        - p, proj:nextnodepostgres:tenant-admin, applications, sync, nextnodepostgres/*, allow
+        - p, proj:nextnodepostgres:tenant-admin, logs, get, nextnodepostgres/*, allow

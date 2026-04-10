@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: tenant1
+  name: nextnodepostgres
   labels:
     smescloud.com/tenant: "true"
-    smescloud.com/tenant-id: "tenant1"
-    smescloud.com/plan: "small"
+    smescloud.com/tenant-id: "nextnodepostgres"
+    smescloud.com/plan: "starter"
     smescloud.com/is-tenant: "true"
     pod-security.kubernetes.io/enforce: restricted
     pod-security.kubernetes.io/enforce-version: latest

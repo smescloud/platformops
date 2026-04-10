@@ -4,9 +4,31 @@ metadata:
   name: default
   namespace: argocd
 spec:
-  sourceRepos: []
-  sourceNamespaces: []
-  destinations: []
-  namespaceResourceBlacklist:
+  sourceRepos:
+    - https://github.com/smescloud/platformops.git
+    - https://charts.jetstack.io
+    - https://charts.longhorn.io
+    - https://prometheus-community.github.io/helm-charts
+  destinations:
+    - namespace: argocd
+      server: https://kubernetes.default.svc
+    - namespace: default
+      server: https://kubernetes.default.svc
+    - namespace: cert-manager
+      server: https://kubernetes.default.svc
+    - namespace: traefik-system
+      server: https://kubernetes.default.svc
+    - namespace: longhorn-system
+      server: https://kubernetes.default.svc
+    - namespace: monitoring
+      server: https://kubernetes.default.svc
+    - namespace: auth
+      server: https://kubernetes.default.svc
+    - namespace: kube-system
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  namespaceResourceWhitelist:
     - group: '*'
       kind: '*'

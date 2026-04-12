@@ -17,46 +17,46 @@ spec:
     - group: ""
       kind: Namespace
   namespaceResourceWhitelist:
-  - group: ""
-    kind: ConfigMap
-  - group: ""
-    kind: Secret
-  - group: ""
-    kind: Service
-  - group: ""
-    kind: PersistentVolumeClaim
-  - group: ""
-    kind: ServiceAccount
-  - group: ""
-    kind: ResourceQuota
-  - group: ""
-    kind: LimitRange
-  - group: apps
-    kind: Deployment
-  - group: apps
-    kind: ReplicaSet
-  - group: apps
-    kind: StatefulSet
-  - group: batch
-    kind: Job
-  - group: batch
-    kind: CronJob
-  - group: networking.k8s.io
-    kind: Ingress
-  - group: networking.k8s.io
-    kind: NetworkPolicy
-  - group: traefik.io
-    kind: IngressRoute
-  - group: traefik.io
-    kind: Middleware
-  - group: cert-manager.io
-    kind: Certificate
-  - group: autoscaling
-    kind: HorizontalPodAutoscaler
-  - group: rbac.authorization.k8s.io
-    kind: Role
-  - group: rbac.authorization.k8s.io
-    kind: RoleBinding
+    - group: ""
+      kind: ConfigMap
+    - group: ""
+      kind: Secret
+    - group: ""
+      kind: Service
+    - group: ""
+      kind: PersistentVolumeClaim
+    - group: ""
+      kind: ServiceAccount
+    - group: ""
+      kind: ResourceQuota
+    - group: ""
+      kind: LimitRange
+    - group: apps
+      kind: Deployment
+    - group: apps
+      kind: ReplicaSet
+    - group: apps
+      kind: StatefulSet
+    - group: batch
+      kind: Job
+    - group: batch
+      kind: CronJob
+    - group: networking.k8s.io
+      kind: Ingress
+    - group: networking.k8s.io
+      kind: NetworkPolicy
+    - group: traefik.io
+      kind: IngressRoute
+    - group: traefik.io
+      kind: Middleware
+    - group: cert-manager.io
+      kind: Certificate
+    - group: autoscaling
+      kind: HorizontalPodAutoscaler
+    - group: rbac.authorization.k8s.io
+      kind: Role
+    - group: rbac.authorization.k8s.io
+      kind: RoleBinding
   roles:
     - name: tenant-admin
       description: nextnodepostgres Argo CD access
